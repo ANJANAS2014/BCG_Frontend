@@ -52,19 +52,16 @@ export class LinechartComponent implements OnInit {
   }
 
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+    
   }
 
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+    
   }
 
 getdata(){
   
   this.barChartData = []
-  console.log("befor push",this.barChartData)
-
-
 
     let No:any={
       label:"North",
@@ -110,7 +107,7 @@ getdata(){
       }
     }
     this.barChartData.push(No,So,Ea,We)
-    console.log(this.barChartData)
+    
   }
 
   getalldata(){
