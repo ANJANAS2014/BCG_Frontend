@@ -1,0 +1,18 @@
+
+.navbar-brand{
+    font-size: 30px !important;
+}
+
+.navbar a{
+    font-weight: 500;
+    font-size: 16px;
+}
+
+nav{
+    background-color: #fff;
+    /* background-image: linear-gradient(180deg, #ffffff 50%, #e0f2ff 100%,#fff 0%); */
+}
+
+.md-form input[type=search]:focus{
+    /*box-shadow: none;*/
+}

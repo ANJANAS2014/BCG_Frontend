@@ -1,0 +1,134 @@
+<div *ngIf="display">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" style="color: black;"><strong>BCG</strong></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto"></ul>
+            <ul class="navbar-nav me-4 ">
+                
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="chart">Chart</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div>
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                    <div
+                        style="margin:auto;width: 80%; margin-top: 100px;background-color: white;border-radius: 15px;border: 1px solid skyblue;">
+                        <!-- Search form -->
+                        <div style="padding-left: 20px;">
+                            <form class="form-inline md-form form-sm" style="margin-bottom: 0;margin-top: 0;">
+                                <mdb-icon style="margin-left: 15px;" fas icon="search" aria-hidden="true"></mdb-icon>
+                                <input style="border-bottom: none;font-weight:bold;font-style: calc();"
+                                    class="form-control form-control-sm ml-3 w-75" autocomplete="off" name="search"
+                                    type="search" [(ngModel)]="searchText" (keypress)="inputSearchValidator($event)"
+                                    aria-label="Search" mdbInput>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div *ngIf="searchText.length>=1">
+                        <div class="row">
+                            <!-- <div  style="margin-top: 0;"></div> -->
+                            <div  style="background-color: white;border-radius: 15px;">
+
+                                <table class="table">
+                                    <thead>
+                                        <th>Policy_id</th>
+                                        <th>Date of Purchase</th>
+                                        <th>Customer Id</th>
+                                        <th>Premium</th>
+                                        <th>Vehicle Segment</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let policy of policies| filter:searchText ;let i=index" style="text-align: center;">
+                                            <td>{{policy['policy_id']}}</td>
+                                            <td>{{policy['date_of_purchase']}}</td>
+                                            <td>{{policy['customer_id']}}</td>
+                                            <td>{{policy['premium']}}</td>
+                                            <td>{{policy['vehicle_segment']}}</td>
+                                            
+                                            <td><button (click)="open(content)" (click)="getdata(policy)">Edit</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <!-- <div class="dis" *ngFor="let policy of policies | filter:searchText"
+                                    style="border-bottom: 1px solid rgba(0, 0, 0, .08);">
+                                    <a (click)="getdata(policy.Policy_id)" (click)="open(content)" style="height: 35px;">
+                                        <p
+                                            style="color:#B91646; font-weight:bold;margin-left: 10px; margin-top: revert;">
+                                            {{policy.Policy_id}}</p>
+                                    </a>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Button trigger modal -->
+
+                    <ng-template #content let-modal>
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="modal-basic-title">Policy Details</h4>
+                          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form [formGroup]="updateForm">
+                            <div class="form-group" style="margin-left: 20px; margin-right: 20px;">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label>Policy Id</label>
+                                        <input class="form-control" formControlName="policy_id" maxlength="10" type="text" 
+                                        [attr.disabled] = true>
+                                    </div>
+                                    <div class="col-md-6 ms-auto">
+                                        <label>Date of Purchase</label>
+                                        <input class="form-control" formControlName="date_of_purchase" type="date">
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                      <div class="col-md-6">
+                                          <label>Customer id</label>
+                                          <input class="form-control" formControlName="customer_id" maxlength="10"type="text"
+                                          [attr.disabled] = true>
+                                      </div>
+                                      <div class="col-md-6 ms-auto">
+                                        <label>Vehicle Segment</label>
+                                        <input class="form-control" (keypress)="inputNameValidator($event)" formControlName="vehicle_segment" maxlength="10" type="text" >
+                                      </div>
+                                  </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label>Premium</label>
+                                        <input class="form-control" (keypress)="inputPreValidator($event)"formControlName="premium" maxlength="7" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')" (click)=update()>Update</button>
+                          <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+                        </div>
+                      </ng-template>
+                                      
+
+                    
+                </div>
+                <div class="col-2"></div>
+            </div>
+        </div>
+    </div>
+</div>
